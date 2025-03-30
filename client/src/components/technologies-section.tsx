@@ -97,12 +97,9 @@ const TechnologiesSection = () => {
               variants={fadeIn("up", "spring", index * 0.05, 0.5)}
               className="w-24 h-24 flex flex-col items-center justify-center rounded-xl bg-background p-4 border border-white/5 hover:border-primary/20 transition-all transform-gpu"
               whileHover={{ 
-                y: -8, 
-                boxShadow: '0 10px 25px -5px rgba(0, 223, 216, 0.3)',
+                boxShadow: '0 0 25px -5px rgba(0, 223, 216, 0.3)',
                 transition: {
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
+                  duration: 0.3
                 }
               }}
             >

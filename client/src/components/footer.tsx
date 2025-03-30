@@ -1,15 +1,8 @@
-import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/motion";
+import React from "react";
 
 const Footer = () => {
   return (
-    <motion.footer 
-      className="py-12 border-t border-white/5 relative bg-background"
-      variants={fadeIn("up", "spring", 0.5, 1)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.1 }}
-    >
+    <footer className="py-12 border-t border-white/5 relative bg-background">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1">
@@ -96,7 +89,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 
