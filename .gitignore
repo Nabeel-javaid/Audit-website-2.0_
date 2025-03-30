@@ -4,3 +4,9 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Don't ignore Vercel deployment files
+!vercel.json
+!vite.vercel.config.ts
+!vercel-build.js
+!public/api/*.json
