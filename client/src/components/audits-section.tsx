@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { fadeIn, staggerContainer } from "@/lib/motion";
@@ -6,7 +6,10 @@ import { audits, AuditCategory } from "@/data/audits";
 
 const AuditsSection = () => {
   const [activeFilter, setActiveFilter] = useState<AuditCategory | "all">("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const auditsPerPage = 6; // Show 6 audits per page as requested
   
+  // Filter audits by category
   const filterAudits = () => {
     if (activeFilter === "all") {
       return audits;
@@ -15,6 +18,24 @@ const AuditsSection = () => {
   };
 
   const filteredAudits = filterAudits();
+  
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredAudits.length / auditsPerPage);
+  const indexOfLastAudit = currentPage * auditsPerPage;
+  const indexOfFirstAudit = indexOfLastAudit - auditsPerPage;
+  const currentAudits = filteredAudits.slice(indexOfFirstAudit, indexOfLastAudit);
+  
+  // Reset to first page when category changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter]);
+  
+  // Handle page change
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Smooth scroll to the top of the audits section
+    document.getElementById('audits')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <section id="audits" className="py-24 relative">
@@ -95,8 +116,9 @@ const AuditsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
+          key={`audits-page-${currentPage}-${activeFilter}`} // Force re-render when page or category changes
         >
-          {filteredAudits.map((audit, index) => (
+          {currentAudits.map((audit, index) => (
             <motion.div 
               key={audit.id}
               variants={fadeIn("up", "spring", index * 0.05, 0.75)}
@@ -293,8 +315,74 @@ const AuditsSection = () => {
           ))}
         </motion.div>
         
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <motion.div 
+            className="flex justify-center mt-12 gap-2"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {/* Previous Page Button */}
+            <motion.button
+              onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                currentPage === 1 
+                  ? "opacity-50 cursor-not-allowed bg-card/50" 
+                  : "bg-card/50 hover:bg-card/80 hover:text-primary"
+              }`}
+              whileHover={currentPage !== 1 ? { scale: 1.1, boxShadow: "0 0 10px rgba(0, 223, 216, 0.2)" } : {}}
+              whileTap={currentPage !== 1 ? { scale: 0.95 } : {}}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </motion.button>
+            
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => (
+              <motion.button
+                key={`page-${i + 1}`}
+                onClick={() => goToPage(i + 1)}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm transition-all ${
+                  currentPage === i + 1
+                    ? "bg-primary text-primary-foreground font-medium"
+                    : "bg-card/50 hover:bg-card/80 hover:text-primary"
+                }`}
+                whileHover={currentPage !== i + 1 ? { scale: 1.1, backgroundColor: "rgba(0, 223, 216, 0.1)" } : {}}
+                whileTap={currentPage !== i + 1 ? { scale: 0.95 } : {}}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+              >
+                {i + 1}
+              </motion.button>
+            ))}
+            
+            {/* Next Page Button */}
+            <motion.button
+              onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                currentPage === totalPages 
+                  ? "opacity-50 cursor-not-allowed bg-card/50" 
+                  : "bg-card/50 hover:bg-card/80 hover:text-primary"
+              }`}
+              whileHover={currentPage !== totalPages ? { scale: 1.1, boxShadow: "0 0 10px rgba(0, 223, 216, 0.2)" } : {}}
+              whileTap={currentPage !== totalPages ? { scale: 0.95 } : {}}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.button>
+          </motion.div>
+        )}
+        
+        {/* View All Button */}
         <motion.div 
-          className="text-center mt-12"
+          className="text-center mt-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

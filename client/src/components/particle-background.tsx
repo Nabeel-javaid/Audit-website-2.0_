@@ -20,21 +20,29 @@ interface Particle {
   orbitCenter?: {x: number, y: number};
 }
 
-const ParticleBackground = () => {
+interface ParticleBackgroundProps {
+  particleDensity?: number; // Control density of particles (default: 70)
+}
+
+const ParticleBackground = ({ particleDensity }: ParticleBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef<{ x: number; y: number } | null>(null);
   const animationFrameRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
   const [isVisible, setIsVisible] = useState(true);
   
-  // Performance optimization - reduce particle count on smaller screens
+  // Performance optimization - adjust particle count based on screen size and density prop
   const getParticleCount = () => {
+    // Use the provided density or default values
+    const baseDensity = particleDensity !== undefined ? particleDensity : 70;
+    const densityRatio = baseDensity / 70; // Calculate ratio compared to default density
+    
     if (typeof window !== 'undefined') {
-      if (window.innerWidth <= 768) return 30;
-      if (window.innerWidth <= 1024) return 50;
-      return 70;
+      if (window.innerWidth <= 768) return Math.round(30 * densityRatio);
+      if (window.innerWidth <= 1024) return Math.round(50 * densityRatio);
+      return Math.round(baseDensity);
     }
-    return 50;
+    return Math.round(baseDensity * 0.7); // Fallback
   };
   
   const particleColors = [
@@ -342,7 +350,7 @@ const ParticleBackground = () => {
       window.removeEventListener("mouseleave", handleMouseLeave);
       intersectionObserver.disconnect();
     };
-  }, []);
+  }, [particleDensity]);
   
   return (
     <motion.canvas

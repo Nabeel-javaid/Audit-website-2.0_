@@ -18,16 +18,16 @@ export interface Audit {
 export const audits: Audit[] = [
   {
     id: 1,
-    title: "FlashLoan Protocol",
-    description: "Comprehensive security audit of a DeFi lending protocol with flash loan capabilities.",
+    title: "GELT Protocol",
+    description: "Security audit of a decentralized savings platform with advanced yield generation capabilities.",
     category: "defi",
     categoryColor: "primary",
-    status: "Secured",
-    statusColor: "green",
-    date: "June 2023",
-    iconSymbol: "$",
+    status: "Issues Found & Resolved",
+    statusColor: "yellow",
+    date: "March 2023",
+    iconSymbol: "💰",
     iconBg: "primary",
-    reportFile: "flashloan-protocol.md"
+    reportFile: "gelt-program.md"
   },
   {
     id: 2,
