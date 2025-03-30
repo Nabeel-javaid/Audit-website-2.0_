@@ -85,7 +85,7 @@ const AuditReport = () => {
               <p className="text-muted-foreground">{error}</p>
             </div>
           ) : (
-            <article className="prose prose-invert prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80 prose-blockquote:border-primary prose-strong:text-white prose-code:text-secondary max-w-none">
+            <article className="prose max-w-none">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {report || ''}
               </ReactMarkdown>

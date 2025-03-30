@@ -52,7 +52,8 @@ export const audits: Audit[] = [
     statusColor: "green",
     date: "March 2023",
     iconSymbol: "G",
-    iconBg: "destructive"
+    iconBg: "destructive",
+    reportFile: "governance-system.md"
   },
   {
     id: 4,
@@ -64,7 +65,8 @@ export const audits: Audit[] = [
     statusColor: "red",
     date: "February 2023",
     iconSymbol: "📈",
-    iconBg: "primary"
+    iconBg: "primary",
+    reportFile: "yield-aggregator.md"
   },
   {
     id: 5,
@@ -76,7 +78,8 @@ export const audits: Audit[] = [
     statusColor: "green",
     date: "January 2023",
     iconSymbol: "▶️",
-    iconBg: "secondary"
+    iconBg: "secondary",
+    reportFile: "gamefi-platform.md"
   },
   {
     id: 6,
@@ -88,6 +91,85 @@ export const audits: Audit[] = [
     statusColor: "yellow",
     date: "December 2022",
     iconSymbol: "🗄️",
-    iconBg: "destructive"
+    iconBg: "destructive",
+    reportFile: "nft-staking-protocol.md"
+  },
+  {
+    id: 7,
+    title: "Decentralized Exchange",
+    description: "Comprehensive security audit of an AMM-based decentralized exchange.",
+    category: "defi",
+    categoryColor: "primary",
+    status: "Secured",
+    statusColor: "green",
+    date: "November 2022",
+    iconSymbol: "💱",
+    iconBg: "primary",
+    reportFile: "decentralized-exchange.md"
+  },
+  {
+    id: 8,
+    title: "Metaverse Land Registry",
+    description: "Security analysis of a virtual land registry and marketplace for a metaverse project.",
+    category: "nft",
+    categoryColor: "secondary",
+    status: "Issues Found & Resolved",
+    statusColor: "yellow",
+    date: "October 2022",
+    iconSymbol: "🏞️",
+    iconBg: "secondary",
+    reportFile: "metaverse-land-registry.md"
+  },
+  {
+    id: 9,
+    title: "Token Bridge",
+    description: "Audit of a cross-chain token bridge system connecting multiple blockchains.",
+    category: "defi",
+    categoryColor: "primary",
+    status: "Critical Issues Found",
+    statusColor: "red",
+    date: "September 2022",
+    iconSymbol: "🌉",
+    iconBg: "destructive",
+    reportFile: "token-bridge.md"
+  },
+  {
+    id: 10,
+    title: "DAO Treasury",
+    description: "Security assessment of a multi-signature treasury management system for DAOs.",
+    category: "dao",
+    categoryColor: "destructive",
+    status: "Secured",
+    statusColor: "green",
+    date: "August 2022",
+    iconSymbol: "💼",
+    iconBg: "primary",
+    reportFile: "dao-treasury.md"
+  },
+  {
+    id: 11,
+    title: "Play-to-Earn Battle Game",
+    description: "Thorough audit of a blockchain-based battle game with NFT characters and rewards.",
+    category: "gaming",
+    categoryColor: "secondary",
+    status: "Issues Found & Resolved",
+    statusColor: "yellow",
+    date: "July 2022",
+    iconSymbol: "⚔️",
+    iconBg: "secondary",
+    reportFile: "battle-game.md"
+  },
+  {
+    id: 12,
+    title: "Stablecoin Protocol",
+    description: "Comprehensive security review of an algorithmic stablecoin protocol.",
+    category: "defi",
+    categoryColor: "primary",
+    status: "Secured",
+    statusColor: "green",
+    date: "June 2022",
+    iconSymbol: "💲",
+    iconBg: "destructive",
+    reportFile: "stablecoin-protocol.md"
   }
 ];
