@@ -26,61 +26,34 @@ const TechnologiesSection = () => {
         initial="hidden"
         animate={animationControls}
       >
-        {/* Animated grid lines */}
+        {/* Static grid lines */}
         <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-10">
           {[...Array(12)].map((_, i) => (
-            <motion.div 
+            <div 
               key={i}
               className="h-full w-px bg-primary/30 justify-self-center"
-              initial={{ height: 0 }}
-              animate={{ height: "100%" }}
-              transition={{ 
-                duration: 1.5, 
-                delay: i * 0.05,
-                ease: "easeOut"
-              }}
             />
           ))}
           {[...Array(12)].map((_, i) => (
-            <motion.div 
+            <div 
               key={`h-${i}`}
               className="w-full h-px bg-primary/20 col-span-12"
               style={{ top: `${(i + 1) * 8}%` }}
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{ 
-                duration: 1.5, 
-                delay: i * 0.05,
-                ease: "easeOut"
-              }}
             />
           ))}
         </div>
 
-        {/* Glowing orbs */}
+        {/* Static orbs */}
         {[...Array(5)].map((_, i) => (
-          <motion.div 
+          <div 
             key={`orb-${i}`}
-            className="absolute rounded-full blur-3xl"
+            className="absolute rounded-full blur-3xl opacity-[0.03]"
             style={{
               width: 100 + Math.random() * 200,
               height: 100 + Math.random() * 200,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: `rgba(${Math.random() * 100}, ${150 + Math.random() * 100}, ${200 + Math.random() * 55}, 0.03)`,
-            }}
-            animate={{
-              x: [0, Math.random() * 40 - 20, 0],
-              y: [0, Math.random() * 40 - 20, 0],
-              scale: [1, 1.05, 1],
-              opacity: [0.02, 0.05, 0.02],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 5,
-              repeat: Infinity,
-              repeatType: "reverse" as const,
-              ease: "easeInOut",
-              delay: i * 0.7,
+              background: `rgba(${Math.random() * 100}, ${150 + Math.random() * 100}, ${200 + Math.random() * 55}, 0.1)`,
             }}
           />
         ))}
@@ -98,23 +71,9 @@ const TechnologiesSection = () => {
             className="text-3xl md:text-4xl font-bold mb-4"
             variants={textVariant(0.2)}
           >
-            <motion.span
-              className="text-gradient"
-              animate={{ 
-                textShadow: [
-                  '0 0 5px rgba(0, 223, 216, 0.3)', 
-                  '0 0 15px rgba(0, 223, 216, 0.2)', 
-                  '0 0 5px rgba(0, 223, 216, 0.3)'
-                ] 
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity,
-                repeatType: "reverse" as const
-              }}
-            >
+            <span className="text-gradient">
               Technologies
-            </motion.span> & Platforms
+            </span> & Platforms
           </motion.h2>
           <motion.p 
             className="text-muted-foreground max-w-xl mx-auto"
@@ -147,46 +106,18 @@ const TechnologiesSection = () => {
                 }
               }}
             >
-              <motion.div 
+              <div 
                 className={`w-10 h-10 rounded-full bg-${tech.iconBg} flex items-center justify-center mb-2 text-${tech.iconColor} font-bold`}
-                whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
-                animate={{
-                  boxShadow: [
-                    `0 0 0px rgba(255, 255, 255, 0)`, 
-                    `0 0 15px rgba(255, 255, 255, 0.3)`, 
-                    `0 0 0px rgba(255, 255, 255, 0)`
-                  ],
-                  transition: {
-                    boxShadow: {
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatType: "reverse" as const,
-                      delay: index * 0.2
-                    }
-                  }
-                }}
-                transition={{ rotate: { duration: 0.5 } }}
               >
-                <motion.span
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity,
-                    repeatType: "reverse" as const,
-                    delay: index * 0.3
-                  }}
-                >
+                <span>
                   {tech.iconSymbol}
-                </motion.span>
-              </motion.div>
-              <motion.span 
-                className="text-xs text-center opacity-80 group-hover:opacity-100 group-hover:text-primary transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
+                </span>
+              </div>
+              <span 
+                className="text-xs text-center opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300"
               >
                 {tech.name}
-              </motion.span>
+              </span>
             </motion.div>
           ))}
         </motion.div>
