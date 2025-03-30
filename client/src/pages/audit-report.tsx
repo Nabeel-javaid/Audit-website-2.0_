@@ -3,7 +3,7 @@ import { useLocation, Link } from 'wouter';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FileDown, Github, ExternalLink } from 'lucide-react';
 import { fadeIn } from '@/lib/motion';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
@@ -19,7 +19,7 @@ const markdownStyles = `
   .audit-report-markdown h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, rgba(0, 223, 216, 1), rgba(145, 94, 255, 0.8));
+    background: linear-gradient(to right, rgba(168, 85, 247, 1), rgba(217, 70, 239, 0.8), rgba(126, 34, 206, 0.9));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -31,9 +31,9 @@ const markdownStyles = `
     font-size: 1.75rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: rgba(0, 223, 216, 0.9);
+    color: rgba(168, 85, 247, 0.9);
     font-weight: 600;
-    border-bottom: 1px solid rgba(0, 223, 216, 0.2);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
     padding-bottom: 0.5rem;
   }
   
@@ -41,7 +41,7 @@ const markdownStyles = `
     font-size: 1.35rem;
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
-    color: rgba(145, 94, 255, 0.9);
+    color: rgba(217, 70, 239, 0.9);
     font-weight: 600;
   }
   
@@ -59,13 +59,13 @@ const markdownStyles = `
   }
   
   .audit-report-markdown a {
-    color: rgba(0, 223, 216, 1);
+    color: rgba(168, 85, 247, 1);
     text-decoration: none;
     transition: all 0.2s ease;
   }
   
   .audit-report-markdown a:hover {
-    color: rgba(145, 94, 255, 1);
+    color: rgba(217, 70, 239, 1);
     text-decoration: underline;
   }
   
@@ -75,7 +75,7 @@ const markdownStyles = `
     border-radius: 0.25rem;
     font-family: monospace;
     font-size: 0.9em;
-    color: rgba(0, 223, 216, 0.9);
+    color: rgba(168, 85, 247, 0.9);
   }
   
   .audit-report-markdown pre {
@@ -84,7 +84,7 @@ const markdownStyles = `
     border-radius: 0.5rem;
     overflow-x: auto;
     margin: 1.5rem 0;
-    border: 1px solid rgba(0, 223, 216, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.2);
   }
   
   .audit-report-markdown pre code {
@@ -104,7 +104,7 @@ const markdownStyles = `
   }
   
   .audit-report-markdown blockquote {
-    border-left: 4px solid rgba(0, 223, 216, 0.5);
+    border-left: 4px solid rgba(168, 85, 247, 0.5);
     padding-left: 1rem;
     margin-left: 0;
     margin-right: 0;
@@ -115,7 +115,7 @@ const markdownStyles = `
   .audit-report-markdown hr {
     border: 0;
     height: 1px;
-    background: linear-gradient(to right, rgba(0, 223, 216, 0.2), rgba(145, 94, 255, 0.2), rgba(0, 223, 216, 0.2));
+    background: linear-gradient(to right, rgba(168, 85, 247, 0.2), rgba(217, 70, 239, 0.2), rgba(168, 85, 247, 0.2));
     margin: 2rem 0;
   }
   
@@ -131,7 +131,7 @@ const markdownStyles = `
   
   .audit-report-markdown th {
     background-color: rgba(0, 0, 0, 0.5);
-    color: rgba(0, 223, 216, 1);
+    color: rgba(168, 85, 247, 1);
     font-weight: 600;
     text-align: left;
     padding: 0.75rem 1rem;
@@ -182,6 +182,22 @@ const AuditReport = () => {
   
   // Extract the filename from the URL
   const filename = location.split('/').pop();
+
+  // Function to convert markdown to PDF and download it
+  const downloadAsPDF = () => {
+    // Create a hidden link to download the file
+    const link = document.createElement('a');
+    link.href = `/src/data/audit-reports/${filename}`;
+    link.download = filename || 'audit-report.md';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
+  // Function to open GitHub repository with this report
+  const viewOnGitHub = () => {
+    window.open(`https://github.com/example-auditor/smart-contract-audits/blob/main/reports/${filename}`, '_blank');
+  };
   
   useEffect(() => {
     const fetchReport = async () => {
@@ -224,17 +240,40 @@ const AuditReport = () => {
           initial="hidden"
           animate="show"
           variants={fadeIn("up", "spring", 0.1, 0.75)}
+          className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4"
         >
           <Link to="/#audits">
             <motion.button 
-              className="group flex items-center gap-2 mb-8 text-muted-foreground hover:text-primary transition-colors bg-background/50 backdrop-blur-sm px-4 py-2 rounded-full"
-              whileHover={{ x: -4, backgroundColor: "rgba(0,0,0,0.5)" }}
+              className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors bg-card/60 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-md border border-white/5"
+              whileHover={{ x: -4, backgroundColor: "rgba(30,20,50,0.8)" }}
               whileTap={{ scale: 0.98 }}
             >
-              <ArrowLeft size={16} className="group-hover:animate-pulse" />
-              <span>Back to Audits</span>
+              <ArrowLeft size={18} className="group-hover:animate-pulse" />
+              <span className="font-medium">Back to Audits</span>
             </motion.button>
           </Link>
+          
+          <div className="flex gap-3">
+            <motion.button
+              onClick={downloadAsPDF}
+              className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors bg-card/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-white/5"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(30,20,50,0.8)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <FileDown size={16} className="text-primary group-hover:animate-bounce" />
+              <span>Download PDF</span>
+            </motion.button>
+            
+            <motion.button
+              onClick={viewOnGitHub}
+              className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors bg-card/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-white/5"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(30,20,50,0.8)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Github size={16} className="text-secondary group-hover:animate-pulse" />
+              <span>View on GitHub</span>
+            </motion.button>
+          </div>
         </motion.div>
         
         <motion.div
