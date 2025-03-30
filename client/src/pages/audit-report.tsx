@@ -244,11 +244,11 @@ const AuditReport = () => {
         >
           <Link to="/#audits">
             <motion.button 
-              className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors bg-card/60 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-md border border-white/5"
-              whileHover={{ x: -4, backgroundColor: "rgba(30,20,50,0.8)" }}
+              className="group flex items-center gap-2 text-white hover:text-primary transition-colors bg-primary/20 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-md border border-primary/30"
+              whileHover={{ x: -4, backgroundColor: "rgba(168,85,247,0.3)" }}
               whileTap={{ scale: 0.98 }}
             >
-              <ArrowLeft size={18} className="group-hover:animate-pulse" />
+              <ArrowLeft size={18} className="text-primary group-hover:animate-pulse" />
               <span className="font-medium">Back to Audits</span>
             </motion.button>
           </Link>
@@ -256,8 +256,8 @@ const AuditReport = () => {
           <div className="flex gap-3">
             <motion.button
               onClick={downloadAsPDF}
-              className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors bg-card/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-white/5"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(30,20,50,0.8)" }}
+              className="group flex items-center gap-2 text-white hover:text-primary transition-colors bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-primary/30"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(168,85,247,0.3)" }}
               whileTap={{ scale: 0.98 }}
             >
               <FileDown size={16} className="text-primary group-hover:animate-bounce" />
@@ -266,8 +266,8 @@ const AuditReport = () => {
             
             <motion.button
               onClick={viewOnGitHub}
-              className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors bg-card/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-white/5"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(30,20,50,0.8)" }}
+              className="group flex items-center gap-2 text-white hover:text-primary transition-colors bg-secondary/20 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-secondary/30"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(217,70,239,0.3)" }}
               whileTap={{ scale: 0.98 }}
             >
               <Github size={16} className="text-secondary group-hover:animate-pulse" />
