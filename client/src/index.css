@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    --background: 230 33% 5%;
+    --background: 240 33% 5%;
     --foreground: 210 40% 98%;
     
-    --card: 222 47% 10%;
+    --card: 250 47% 10%;
     --card-foreground: 210 40% 98%;
     
-    --popover: 222 47% 10%;
+    --popover: 250 47% 10%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 178 100% 44%;
+    --primary: 267 100% 65%;
     --primary-foreground: 222 47% 11%;
     
-    --secondary: 263 100% 78%;
+    --secondary: 288 96% 78%;
     --secondary-foreground: 222 47% 11%;
     
-    --muted: 217 33% 17%;
+    --muted: 250 33% 17%;
     --muted-foreground: 215 20% 75%;
     
-    --accent: 263 100% 78%;
+    --accent: 320 95% 65%;
     --accent-foreground: 210 40% 98%;
     
-    --destructive: 0 84% 60%;
+    --destructive: 350 95% 65%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 178 100% 44%;
+    --border: 267 33% 20%;
+    --input: 267 33% 20%;
+    --ring: 267 100% 65%;
 
-    --chart-1: 178 100% 44%;
-    --chart-2: 263 100% 78%;
-    --chart-3: 0 84% 60%;
-    --chart-4: 50 100% 50%;
-    --chart-5: 130 100% 40%;
+    --chart-1: 267 100% 65%;
+    --chart-2: 288 96% 78%;
+    --chart-3: 320 95% 65%;
+    --chart-4: 200 95% 65%;
+    --chart-5: 160 95% 65%;
     
     --radius: 0.75rem;
   }
@@ -51,29 +51,31 @@
     font-family: 'Poppins', sans-serif;
     @apply bg-background text-foreground;
     background-image: 
-      radial-gradient(circle at 40% 20%, rgba(145, 94, 255, 0.1) 0%, transparent 20%),
-      radial-gradient(circle at 80% 50%, rgba(0, 223, 216, 0.1) 0%, transparent 20%);
+      radial-gradient(circle at 40% 20%, rgba(157, 78, 221, 0.15) 0%, transparent 25%),
+      radial-gradient(circle at 80% 50%, rgba(238, 78, 187, 0.15) 0%, transparent 25%),
+      radial-gradient(circle at 20% 80%, rgba(78, 185, 238, 0.12) 0%, transparent 25%);
     overflow-x: hidden;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary;
   }
 
   .glow {
-    @apply shadow-[0_0_15px_rgba(0,223,216,0.5)];
+    @apply shadow-[0_0_15px_rgba(157,78,221,0.5)];
   }
 
   .glow-text {
-    text-shadow: 0 0 8px rgba(0, 223, 216, 0.7);
+    text-shadow: 0 0 8px rgba(157, 78, 221, 0.7);
   }
 
   .audit-card {
-    @apply bg-gradient-to-br from-[rgba(21,16,48,0.8)] to-[rgba(5,8,22,0.5)] backdrop-blur-md border border-white/5 transition-all duration-300;
+    @apply bg-gradient-to-br from-[rgba(47,28,74,0.8)] to-[rgba(13,8,32,0.5)] backdrop-blur-md border border-white/5 transition-all duration-300;
   }
 
   .audit-card:hover {
-    @apply transform -translate-y-1 shadow-lg shadow-primary/20 border-primary/20;
+    @apply transform -translate-y-1 shadow-lg shadow-primary/30 border-primary/30;
+    background-image: linear-gradient(135deg, rgba(157, 78, 221, 0.15), rgba(13, 8, 32, 0.5), rgba(238, 78, 187, 0.12));
   }
 
   .font-mono {

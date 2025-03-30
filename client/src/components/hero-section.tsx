@@ -210,9 +210,9 @@ const HeroSection = () => {
               className="text-gradient"
               animate={{ 
                 textShadow: [
-                  '0 0 5px rgba(0, 223, 216, 0.5)', 
-                  '0 0 15px rgba(0, 223, 216, 0.3)', 
-                  '0 0 5px rgba(0, 223, 216, 0.5)'
+                  '0 0 5px rgba(168, 85, 247, 0.5)', 
+                  '0 0 15px rgba(168, 85, 247, 0.3)', 
+                  '0 0 5px rgba(168, 85, 247, 0.5)'
                 ] 
               }}
               transition={{ 
@@ -256,7 +256,7 @@ const HeroSection = () => {
               <motion.div 
                 className="w-10 h-10 rounded-full bg-card flex items-center justify-center border border-primary/20"
                 animate={{ 
-                  boxShadow: ['0 0 0px rgba(0, 223, 216, 0)', '0 0 10px rgba(0, 223, 216, 0.5)', '0 0 0px rgba(0, 223, 216, 0)']
+                  boxShadow: ['0 0 0px rgba(168, 85, 247, 0)', '0 0 10px rgba(168, 85, 247, 0.5)', '0 0 0px rgba(168, 85, 247, 0)']
                 }}
                 transition={{ 
                   duration: 3, 
@@ -281,7 +281,7 @@ const HeroSection = () => {
               <motion.div 
                 className="w-10 h-10 rounded-full bg-card flex items-center justify-center border border-secondary/20"
                 animate={{ 
-                  boxShadow: ['0 0 0px rgba(145, 94, 255, 0)', '0 0 10px rgba(145, 94, 255, 0.5)', '0 0 0px rgba(145, 94, 255, 0)']
+                  boxShadow: ['0 0 0px rgba(217, 70, 239, 0)', '0 0 10px rgba(217, 70, 239, 0.5)', '0 0 0px rgba(217, 70, 239, 0)']
                 }}
                 transition={{ 
                   duration: 3, 
@@ -296,7 +296,7 @@ const HeroSection = () => {
               <div>
                 <motion.h4 
                   className="text-sm font-medium"
-                  animate={{ color: ['#FFFFFF', '#bfbfff', '#FFFFFF'] }}
+                  animate={{ color: ['#FFFFFF', '#d946ef', '#FFFFFF'] }}
                   transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                 >
                   100+
