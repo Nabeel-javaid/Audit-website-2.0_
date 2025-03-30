@@ -3,7 +3,7 @@ import { useLocation, Link } from 'wouter';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download, Github, ExternalLink } from 'lucide-react';
 import { fadeIn } from '@/lib/motion';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
@@ -19,7 +19,7 @@ const markdownStyles = `
   .audit-report-markdown h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, rgba(0, 223, 216, 1), rgba(145, 94, 255, 0.8));
+    background: linear-gradient(to right, rgba(168, 85, 247, 1), rgba(217, 70, 239, 0.8));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -31,9 +31,9 @@ const markdownStyles = `
     font-size: 1.75rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: rgba(0, 223, 216, 0.9);
+    color: rgba(168, 85, 247, 0.9);
     font-weight: 600;
-    border-bottom: 1px solid rgba(0, 223, 216, 0.2);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
     padding-bottom: 0.5rem;
   }
   
@@ -41,7 +41,7 @@ const markdownStyles = `
     font-size: 1.35rem;
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
-    color: rgba(145, 94, 255, 0.9);
+    color: rgba(217, 70, 239, 0.9);
     font-weight: 600;
   }
   
@@ -59,13 +59,13 @@ const markdownStyles = `
   }
   
   .audit-report-markdown a {
-    color: rgba(0, 223, 216, 1);
+    color: rgba(168, 85, 247, 1);
     text-decoration: none;
     transition: all 0.2s ease;
   }
   
   .audit-report-markdown a:hover {
-    color: rgba(145, 94, 255, 1);
+    color: rgba(217, 70, 239, 1);
     text-decoration: underline;
   }
   
@@ -75,7 +75,7 @@ const markdownStyles = `
     border-radius: 0.25rem;
     font-family: monospace;
     font-size: 0.9em;
-    color: rgba(0, 223, 216, 0.9);
+    color: rgba(168, 85, 247, 0.9);
   }
   
   .audit-report-markdown pre {
@@ -84,7 +84,7 @@ const markdownStyles = `
     border-radius: 0.5rem;
     overflow-x: auto;
     margin: 1.5rem 0;
-    border: 1px solid rgba(0, 223, 216, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.2);
   }
   
   .audit-report-markdown pre code {
@@ -104,7 +104,7 @@ const markdownStyles = `
   }
   
   .audit-report-markdown blockquote {
-    border-left: 4px solid rgba(0, 223, 216, 0.5);
+    border-left: 4px solid rgba(168, 85, 247, 0.5);
     padding-left: 1rem;
     margin-left: 0;
     margin-right: 0;
@@ -115,7 +115,7 @@ const markdownStyles = `
   .audit-report-markdown hr {
     border: 0;
     height: 1px;
-    background: linear-gradient(to right, rgba(0, 223, 216, 0.2), rgba(145, 94, 255, 0.2), rgba(0, 223, 216, 0.2));
+    background: linear-gradient(to right, rgba(168, 85, 247, 0.2), rgba(217, 70, 239, 0.2), rgba(168, 85, 247, 0.2));
     margin: 2rem 0;
   }
   
@@ -131,7 +131,7 @@ const markdownStyles = `
   
   .audit-report-markdown th {
     background-color: rgba(0, 0, 0, 0.5);
-    color: rgba(0, 223, 216, 1);
+    color: rgba(168, 85, 247, 1);
     font-weight: 600;
     text-align: left;
     padding: 0.75rem 1rem;
