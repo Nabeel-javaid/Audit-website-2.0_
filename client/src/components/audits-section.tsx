@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "@/lib/motion";
 import { audits, AuditCategory } from "@/data/audits";
 
@@ -111,15 +111,35 @@ const AuditsSection = () => {
               key={audit.id}
               variants={fadeIn("up", "spring", index * 0.1, 0.75)}
               className="audit-card rounded-xl overflow-hidden p-6 relative group"
-              whileHover={{ y: -5 }}
+              whileHover={{ 
+                y: -8,
+                boxShadow: "0 10px 30px -10px rgba(0, 223, 216, 0.2)"
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeOut"
+              }}
             >
               <div className={`absolute top-0 right-0 bg-${audit.categoryColor}/20 text-${audit.categoryColor} text-xs font-mono px-3 py-1 rounded-bl-lg`}>
                 {audit.category.charAt(0).toUpperCase() + audit.category.slice(1)}
               </div>
               <div className="mb-4">
-                <div className={`w-12 h-12 rounded-lg bg-${audit.iconBg} flex items-center justify-center mb-4 text-xl font-bold`}>
+                <motion.div 
+                  className={`w-12 h-12 rounded-lg bg-${audit.iconBg} flex items-center justify-center mb-4 text-xl font-bold`}
+                  whileHover={{ scale: 1.05 }}
+                  animate={{ 
+                    boxShadow: ['0 0 0px rgba(255, 255, 255, 0)', '0 0 10px rgba(255, 255, 255, 0.2)', '0 0 0px rgba(255, 255, 255, 0)']
+                  }}
+                  transition={{ 
+                    boxShadow: { 
+                      duration: 2, 
+                      repeat: Infinity,
+                      delay: index * 0.2
+                    }
+                  }}
+                >
                   {audit.iconSymbol}
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-semibold mb-2">{audit.title}</h3>
                 <p className="text-muted-foreground text-sm">
                   {audit.description}
@@ -144,15 +164,50 @@ const AuditsSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <a 
+          <motion.a 
             href="#" 
-            className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-primary/30 rounded-full font-medium bg-card/50 hover:bg-card/80 transition-all transform hover:-translate-y-1"
+            className="relative inline-flex items-center gap-2 px-6 py-3 border border-white/10 rounded-full font-medium bg-card/50 overflow-hidden group"
+            whileHover={{ 
+              scale: 1.03, 
+              borderColor: "rgba(0, 223, 216, 0.3)" 
+            }}
+            whileTap={{ scale: 0.98 }}
           >
-            View All Audits
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+            {/* Background hover effect */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 z-0"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.5 }}
+            />
+            
+            {/* Arrow icon animation */}
+            <span className="relative z-10">View All Audits</span>
+            <motion.div
+              className="relative z-10"
+              whileHover={{ x: [0, 5, 0] }}
+              transition={{ 
+                duration: 1, 
+                repeat: Infinity,
+                repeatType: "loop" 
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </motion.div>
+            
+            {/* Glow effect */}
+            <AnimatePresence>
+              <motion.div 
+                className="absolute inset-0 -z-10 opacity-0 bg-primary/20 blur-xl"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileHover={{ opacity: 0.7, scale: 1.2 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+              />
+            </AnimatePresence>
+          </motion.a>
         </motion.div>
       </div>
     </section>
