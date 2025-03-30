@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 33% 5%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 178 100% 44%;
+    --primary-foreground: 222 47% 11%;
+    
+    --secondary: 263 100% 78%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 75%;
+    
+    --accent: 263 100% 78%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 178 100% 44%;
+
+    --chart-1: 178 100% 44%;
+    --chart-2: 263 100% 78%;
+    --chart-3: 0 84% 60%;
+    --chart-4: 50 100% 50%;
+    --chart-5: 130 100% 40%;
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 40% 20%, rgba(145, 94, 255, 0.1) 0%, transparent 20%),
+      radial-gradient(circle at 80% 50%, rgba(0, 223, 216, 0.1) 0%, transparent 20%);
+    overflow-x: hidden;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .glow {
+    @apply shadow-[0_0_15px_rgba(0,223,216,0.5)];
+  }
+
+  .glow-text {
+    text-shadow: 0 0 8px rgba(0, 223, 216, 0.7);
+  }
+
+  .audit-card {
+    @apply bg-gradient-to-br from-[rgba(21,16,48,0.8)] to-[rgba(5,8,22,0.5)] backdrop-blur-md border border-white/5 transition-all duration-300;
+  }
+
+  .audit-card:hover {
+    @apply transform -translate-y-1 shadow-lg shadow-primary/20 border-primary/20;
+  }
+
+  .font-mono {
+    font-family: 'Space Mono', monospace;
+  }
+}
