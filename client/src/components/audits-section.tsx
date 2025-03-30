@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "wouter";
 import { fadeIn, staggerContainer } from "@/lib/motion";
 import { audits, AuditCategory } from "@/data/audits";
 

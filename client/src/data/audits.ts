@@ -12,6 +12,7 @@ export interface Audit {
   date: string;
   iconSymbol: string;
   iconBg: string;
+  reportFile?: string; // Markdown file name in the audit-reports directory
 }
 
 export const audits: Audit[] = [
@@ -25,7 +26,8 @@ export const audits: Audit[] = [
     statusColor: "green",
     date: "June 2023",
     iconSymbol: "$",
-    iconBg: "primary"
+    iconBg: "primary",
+    reportFile: "flashloan-protocol.md"
   },
   {
     id: 2,
@@ -37,7 +39,8 @@ export const audits: Audit[] = [
     statusColor: "yellow",
     date: "April 2023",
     iconSymbol: "A",
-    iconBg: "secondary"
+    iconBg: "secondary",
+    reportFile: "cryptoart-marketplace.md"
   },
   {
     id: 3,

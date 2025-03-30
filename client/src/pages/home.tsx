@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import HeroSection from "@/components/hero-section";
+import TechnologiesSection from "@/components/technologies-section";
 import AuditsSection from "@/components/audits-section";
-import ExpertiseSection from "@/components/expertise-section";
 import StatsSection from "@/components/stats-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
@@ -14,8 +14,8 @@ const Home = () => {
       <Header />
       <main>
         <HeroSection />
+        <TechnologiesSection />
         <AuditsSection />
-        <ExpertiseSection />
         <StatsSection />
         <ContactSection />
       </main>
