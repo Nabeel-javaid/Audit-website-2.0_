@@ -244,67 +244,7 @@ const HeroSection = () => {
             </FuturisticButton>
           </motion.div>
           
-          <motion.div 
-            variants={fadeIn("right", "spring", 0.6, 0.75)}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4"
-          >
-            <motion.div 
-              className="flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              <motion.div 
-                className="w-10 h-10 rounded-full bg-card flex items-center justify-center border border-primary/20"
-                animate={{ 
-                  boxShadow: ['0 0 0px rgba(168, 85, 247, 0)', '0 0 10px rgba(168, 85, 247, 0.5)', '0 0 0px rgba(168, 85, 247, 0)']
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity 
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </motion.div>
-              <div>
-                <h4 className="text-sm font-medium">Certified</h4>
-                <p className="text-xs text-muted-foreground">Smart Contract Auditor</p>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              <motion.div 
-                className="w-10 h-10 rounded-full bg-card flex items-center justify-center border border-secondary/20"
-                animate={{ 
-                  boxShadow: ['0 0 0px rgba(217, 70, 239, 0)', '0 0 10px rgba(217, 70, 239, 0.5)', '0 0 0px rgba(217, 70, 239, 0)']
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity,
-                  delay: 1.5
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-secondary" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-                </svg>
-              </motion.div>
-              <div>
-                <motion.h4 
-                  className="text-sm font-medium"
-                  animate={{ color: ['#FFFFFF', '#d946ef', '#FFFFFF'] }}
-                  transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                >
-                  100+
-                </motion.h4>
-                <p className="text-xs text-muted-foreground">Audits Completed</p>
-              </div>
-            </motion.div>
-          </motion.div>
+          {/* Stats section removed as requested */}
         </motion.div>
         
         <div className="relative hidden md:block">
