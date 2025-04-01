@@ -240,7 +240,7 @@ const AuditReport = () => {
           initial="hidden"
           animate="show"
           variants={fadeIn("up", "spring", 0.1, 0.75)}
-          className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4"
+          className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4 mt-12"
         >
           <Link to="/#audits">
             <motion.button 
