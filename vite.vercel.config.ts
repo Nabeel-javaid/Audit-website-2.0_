@@ -18,5 +18,6 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  root: path.resolve(__dirname, './client')
 });
