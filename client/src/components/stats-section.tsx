@@ -9,10 +9,17 @@ const stats = [
   { value: 5, suffix: "+", label: "Years Experience" }
 ];
 
+interface AnimatedCounterProps {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  delay?: number;
+}
+
 // Counter animation component
-const AnimatedCounter = ({ value, prefix = "", suffix = "", delay = 0 }) => {
+const AnimatedCounter = ({ value, prefix = "", suffix = "", delay = 0 }: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   
   useEffect(() => {
@@ -23,13 +30,13 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", delay = 0 }) => {
     
     // Only start counting after delay
     const startTimeout = setTimeout(() => {
-      let startTime;
-      let animationFrameId;
+      let startTime: number | undefined;
+      let animationFrameId: number | undefined;
       
       // Animation duration in ms (slightly randomized)
       const duration = 2000 + (Math.random() * 1000);
       
-      const updateCount = (timestamp) => {
+      const updateCount = (timestamp: number) => {
         if (!startTime) startTime = timestamp;
         const progress = (timestamp - startTime) / duration;
         
@@ -46,7 +53,7 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", delay = 0 }) => {
       animationFrameId = requestAnimationFrame(updateCount);
       
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
         clearTimeout(startTimeout);
       };
     }, delay);
