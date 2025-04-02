@@ -70,38 +70,74 @@ export async function setupVite(app: Express, server: Server) {
   });
 }
 
-
 export function serveStatic(app: Express) {
-  // In production after build, __dirname will be in the dist directory,
-  // so we need to look for files in "public" or adjust based on your build output
-  const distPath = path.resolve(__dirname, "public");
-  
-  // For debugging
-  console.log(`Looking for static files in: ${distPath}`);
-  console.log(`Current __dirname: ${__dirname}`);
-  
-  if (!fs.existsSync(distPath)) {
-    // Try alternate paths
-    const altDistPath = path.resolve(__dirname, "../public");
-    console.log(`Trying alternate path: ${altDistPath}`);
-    
-    if (fs.existsSync(altDistPath)) {
-      app.use(express.static(altDistPath));
-      app.use("*", (_req, res) => {
-        res.sendFile(path.resolve(altDistPath, "index.html"));
-      });
-      return;
+  // Try multiple possible paths where static files might be
+  const possiblePaths = [
+    path.resolve(process.cwd(), "dist/public"),
+    path.resolve(process.cwd(), "dist/client"),
+    path.resolve(process.cwd(), "public"),
+    path.resolve(__dirname, "public"),
+    path.resolve(__dirname, "../public"),
+    path.resolve(__dirname, "../client"),
+    path.resolve(__dirname, "../../public"),
+  ];
+
+  // Log all possible paths we're checking
+  console.log('Current directory:', process.cwd());
+  console.log('__dirname:', __dirname);
+  console.log('Checking the following paths for static files:');
+  possiblePaths.forEach(p => console.log(`- ${p}`));
+
+  // Find the first path that exists
+  let staticPath = null;
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      console.log(`Found static files at: ${p}`);
+      staticPath = p;
+      break;
     }
-    
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
   }
 
-  app.use(express.static(distPath));
+  if (!staticPath) {
+    console.error('Could not find static files in any of the checked paths!');
+    console.error('Files in current directory:', fs.readdirSync(process.cwd()));
+    if (fs.existsSync(path.resolve(process.cwd(), 'dist'))) {
+      console.error('Files in dist directory:', fs.readdirSync(path.resolve(process.cwd(), 'dist')));
+    }
 
-  // fall through to index.html if the file doesn't exist
+    // Use a default path to avoid crashing
+    staticPath = path.resolve(process.cwd(), 'dist');
+    console.log(`Falling back to default path: ${staticPath}`);
+  }
+
+  // Serve static files
+  app.use(express.static(staticPath));
+
+  // Create an index.html if it doesn't exist (for debugging only)
+  const indexPath = path.resolve(staticPath, 'index.html');
+  if (!fs.existsSync(indexPath)) {
+    console.log(`index.html not found, creating a basic one at ${indexPath}`);
+    try {
+      fs.writeFileSync(indexPath, `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Emergency Fallback Page</title>
+        </head>
+        <body>
+          <h1>Emergency Fallback Page</h1>
+          <p>The application is running but couldn't find the proper static files.</p>
+          <p>This is a fallback page to prevent 404 errors.</p>
+        </body>
+        </html>
+      `);
+    } catch (e) {
+      console.error('Failed to create fallback index.html:', e);
+    }
+  }
+
+  // fall through to index.html
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(path.resolve(staticPath, "index.html"));
   });
 }
