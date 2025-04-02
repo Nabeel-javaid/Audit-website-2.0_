@@ -70,10 +70,29 @@ export async function setupVite(app: Express, server: Server) {
   });
 }
 
-export function serveStatic(app: Express) {
-  const distPath = path.resolve(__dirname, "public");
 
+export function serveStatic(app: Express) {
+  // In production after build, __dirname will be in the dist directory,
+  // so we need to look for files in "public" or adjust based on your build output
+  const distPath = path.resolve(__dirname, "public");
+  
+  // For debugging
+  console.log(`Looking for static files in: ${distPath}`);
+  console.log(`Current __dirname: ${__dirname}`);
+  
   if (!fs.existsSync(distPath)) {
+    // Try alternate paths
+    const altDistPath = path.resolve(__dirname, "../public");
+    console.log(`Trying alternate path: ${altDistPath}`);
+    
+    if (fs.existsSync(altDistPath)) {
+      app.use(express.static(altDistPath));
+      app.use("*", (_req, res) => {
+        res.sendFile(path.resolve(altDistPath, "index.html"));
+      });
+      return;
+    }
+    
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,
     );
