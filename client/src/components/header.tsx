@@ -49,7 +49,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <NavItem href="#home">Home</NavItem>
             <NavItem href="#audits">Audits</NavItem>
-            <NavItem href="#expertise">Expertise</NavItem>
+            {/* <NavItem href="#expertise">Expertise</NavItem> */}
             <NavItem href="#contact">Contact</NavItem>
           </nav>
           
